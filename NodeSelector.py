@@ -43,7 +43,7 @@ shader_node_list = [
     ["RGB", "RGB", "ShaderNodeRGB"],
     ["Tangent", "タンジェント", "ShaderNodeTangent"],
     ["Texture Coordinate", "テクスチャ座標", "ShaderNodeTexCoord"],
-    ["UV Map", "UVマップ", "ShaderNodeTexCoord"],
+    ["UV Map", "UVマップ", "ShaderNodeUVMap"],
     ["Value", "値", "ShaderNodeValue"],
     ["Volume Info", "ボリューム情報", "ShaderNodeValue"],
     ["Wireframe", "ワイヤーフレーム", "ShaderNodeWireframe"],
@@ -116,7 +116,7 @@ shader_node_list = [
     ["Separate Color", "カラー分離", "ShaderNodeSeparateColor"],
     ["Separate XYZ", "XYZ分離", "ShaderNodeSeparateXYZ"],
     ["Shader To RGB", "シェーダーのRGB化", "ShaderNodeVectorMath"],
-    ["Vector Math", "ベクトル演算", "ShaderNodeWavelength"],
+    ["Vector Math", "ベクトル演算", "ShaderNodeVectorMath"],
     ["Wavelength", "波長", "ShaderNodeScript"],
     ["Script", "スクリプト", ""],
 #    ["Make Group", "グループ作成", ""],
@@ -357,8 +357,9 @@ def update_text_input(self, context):
                 new_node = bpy.ops.node.add_node(type=node_name, use_transform=True)
                 active_node = context.active_node
                 pos = (active_node.location.x - active_node.width - 100, active_node.location.y)
+                return bpy.ops.node.translate_attach_remove_on_cancel('INVOKE_DEFAULT')
                 break
-        return bpy.ops.node.translate_attach_remove_on_cancel('INVOKE_DEFAULT')
+        return 'FINISHED'
 
 
 
